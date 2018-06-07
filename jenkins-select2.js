@@ -9,7 +9,7 @@
             $("select").select2()
 
             // a little bit of re-styling for prod
-            if (true || window.location.hostname.indexOf("ext.nat") > -1) {
+            if (window.location.hostname.indexOf("ext.nat") > -1) {
                 $("#header").css("background", "#FA3535");
                 $("body").append(
                     `<div id="warnBox" style="bottom: 0px; width: 75%; position: fixed; left: 50%; margin-left: -37.5%;">

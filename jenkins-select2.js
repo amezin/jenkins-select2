@@ -9,14 +9,18 @@
             $("select").select2()
 
             // a little bit of re-styling for prod
-            if (window.location.hostname.indexOf("ext.nat") > -1) {
+            if (true || window.location.hostname.indexOf("ext.nat") > -1) {
                 $("#header").css("background", "#FA3535");
-                $("#header").append('<div id="prodBox" style="float: right;font-size: 18px;font-weight: bold;margin-top: 10px;margin-right: 10px;color: white;">PROD: SERIOUS</div>')
-                blinker("#prodBox")
+                $("body").append(
+                    `<div id="warnBox" style="bottom: 0px; width: 75%; position: fixed; left: 50%; margin-left: -37.5%;">
+<div style="padding: 10px; font-size: 18px; font-weight: bold; color: white; width: 40%; text-align: center; background: red; margin: 0 auto; border-radius: 2px;">
+PROD: SERIOUS</div>
+</div>`)
+                blinker("#warnBox")
 
                 function blinker(id){
-                    $(id).fadeOut(500, function(){
-                        $(id).fadeIn(500, function(){
+                    $(id).fadeTo(1000, 0.65, function(){
+                        $(id).fadeTo(1000, 1, function(){
                             blinker(id);
                         })
                     });
@@ -26,8 +30,5 @@
         document.getElementsByTagName("head")[0].appendChild(script);
     }
     
-    // Load the script after 1 second to alleviate race conditions
-    // If this doesn't work we can reassert JQuery and then assert select2
-    // Arguably thats an even uglier solution than this though
-    setTimeout(delayedLoad, 1500);
+    window.addEventListener('load', delayedLoad);
 })();
